@@ -8,6 +8,7 @@
 //https://www.youtube.com/watch?v=gq2Igdc-OSI
 //https://www.youtube.com/watch?v=DHAAy4GJ684
 //https://medium.com/@VIRAL/mac-xcode-and-c-file-handling-78ba999032df
+//https://www.w3schools.com/cpp/cpp_files.asp
 
 #include <iostream>
 #include <string>
@@ -38,6 +39,44 @@ void ReadFile()
         }
     }
 
+void ReadFile2()
+    {
+        int sum = 0;
+        int x;
+        ifstream inFile;
+        
+        inFile.open("test.txt");
+        if (!inFile) {
+            cout << "Unable to open file";
+            exit(1); // terminate with error
+        }
+        
+        while (inFile >> x) {
+            sum = sum + x;
+        }
+        
+        inFile.close();
+        cout << "Sum = " << sum << endl;
+        //return 0;
+    }
+
+void ReadFile3()
+    {
+        ifstream myReadFile;
+        myReadFile.open("test.txt");
+        char output[100];
+        if (myReadFile.is_open()) {
+        while (!myReadFile.eof()) {
+
+
+           myReadFile >> output;
+           cout<<output;
+
+
+        }
+       }
+       myReadFile.close();
+    }
 class Animal
     {
         private:
@@ -115,6 +154,6 @@ int main(int argc, const char * argv[])
         Grumps.setFriendly(1);
         Grumps.pet();
         //cout << Link.getID() << endl;
-        ReadFile();
+        ReadFile3();
         return 0;
     }
