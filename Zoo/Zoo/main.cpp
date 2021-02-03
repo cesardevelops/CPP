@@ -7,10 +7,36 @@
 //https://www.geeksforgeeks.org/inheritance-in-c/
 //https://www.youtube.com/watch?v=gq2Igdc-OSI
 //https://www.youtube.com/watch?v=DHAAy4GJ684
+//https://medium.com/@VIRAL/mac-xcode-and-c-file-handling-78ba999032df
 
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
+
+void ReadFile()
+    {
+        cout << "opening data1.txt....\n";
+        ifstream infile("test.txt");
+        int n=0;
+     
+        if (infile.is_open())
+        {
+            while (infile >> n)
+            {
+                
+                cout << n;
+                
+                cout<<"\b";
+                
+            }
+            infile.close();
+        }
+        else
+        {
+            cout<<"ERROR";
+        }
+    }
 
 class Animal
     {
@@ -89,5 +115,6 @@ int main(int argc, const char * argv[])
         Grumps.setFriendly(1);
         Grumps.pet();
         //cout << Link.getID() << endl;
+        ReadFile();
         return 0;
     }

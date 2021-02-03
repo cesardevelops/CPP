@@ -28,6 +28,7 @@
 		F838254F25C92253003845DA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F838255725C92328003845DA /* Animal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Animal.cpp; sourceTree = "<group>"; };
 		F838255825C92328003845DA /* Animal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Animal.hpp; sourceTree = "<group>"; };
+		F8F56BE925CA9AF9001A9BA2 /* test.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = test.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				F838254F25C92253003845DA /* main.cpp */,
+				F8F56BE925CA9AF9001A9BA2 /* test.txt */,
 				F838255725C92328003845DA /* Animal.cpp */,
 				F838255825C92328003845DA /* Animal.hpp */,
 			);
