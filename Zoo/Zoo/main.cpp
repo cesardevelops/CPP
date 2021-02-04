@@ -9,74 +9,14 @@
 //https://www.youtube.com/watch?v=DHAAy4GJ684
 //https://medium.com/@VIRAL/mac-xcode-and-c-file-handling-78ba999032df
 //https://www.w3schools.com/cpp/cpp_files.asp
+//tinyurl.com/4l4olf5b
 
 #include <iostream>
 #include <string>
 #include <fstream>
+
 using namespace std;
 
-void ReadFile()
-    {
-        cout << "opening data1.txt....\n";
-        ifstream infile("test.txt");
-        int n=0;
-     
-        if (infile.is_open())
-        {
-            while (infile >> n)
-            {
-                
-                cout << n;
-                
-                cout<<"\b";
-                
-            }
-            infile.close();
-        }
-        else
-        {
-            cout<<"ERROR";
-        }
-    }
-
-void ReadFile2()
-    {
-        int sum = 0;
-        int x;
-        ifstream inFile;
-        
-        inFile.open("test.txt");
-        if (!inFile) {
-            cout << "Unable to open file";
-            exit(1); // terminate with error
-        }
-        
-        while (inFile >> x) {
-            sum = sum + x;
-        }
-        
-        inFile.close();
-        cout << "Sum = " << sum << endl;
-        //return 0;
-    }
-
-void ReadFile3()
-    {
-        ifstream myReadFile;
-        myReadFile.open("test.txt");
-        char output[100];
-        if (myReadFile.is_open()) {
-        while (!myReadFile.eof()) {
-
-
-           myReadFile >> output;
-           cout<<output;
-
-
-        }
-       }
-       myReadFile.close();
-    }
 class Animal
     {
         private:
@@ -142,6 +82,30 @@ class Dog : public Animal
             }
     };
 
+
+void OverwriteFile()
+    {
+        ofstream a_file("example.txt");
+        a_file << "New text inside file!";
+        a_file.close();
+    }
+void AppendToFile()
+    {
+        ofstream a_file("example.txt", ios::app);
+        a_file << "Appending some content to file";
+        a_file.close();
+    }
+
+void ReadFile()
+    {
+        string astr;
+        ifstream b_file("example.txt");
+        getline ( b_file, astr );
+        cout<<astr;
+        b_file.close();
+    }
+
+
 int main(int argc, const char * argv[])
     {
         Dog Link;
@@ -153,7 +117,9 @@ int main(int argc, const char * argv[])
         Grumps.setID(2);
         Grumps.setFriendly(1);
         Grumps.pet();
-        //cout << Link.getID() << endl;
-        ReadFile3();
+
+        //OverwriteFile();
+        AppendToFile();
+        ReadFile();
         return 0;
     }
