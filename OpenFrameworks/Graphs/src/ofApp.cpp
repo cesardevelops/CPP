@@ -2,7 +2,10 @@
 //https://openframeworks.cc/documentation/ofxAssimpModelLoader/ofxAssimpModelLoader/
 
 #include "ofApp.h"
+#include <string>
+using namespace std;
 
+float counter=0;
 //--------------------------------------------------------------
 void ofApp::setup(){
 
@@ -15,9 +18,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofDrawBitmapStringHighlight("Everything works!", 20, 20);
+    
+    counter = counter + (0.01 * ofGetFrameRate());
     string fpsStr = "frame rate: "+ofToString(ofGetFrameRate(), 2);
     ofDrawBitmapString(fpsStr, 100,100);
+    ofDrawBitmapStringHighlight("Everything works!", counter, counter);
 }
 
 //--------------------------------------------------------------
