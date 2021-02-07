@@ -13,8 +13,9 @@
 using namespace std;
 
 float counter = 0;
-//int xmouse = 0;
-//int ymouse = 0;
+
+
+
 
 void CountWords()
     {
@@ -54,30 +55,13 @@ void CountWords()
         
     }
 
-void SplitStringB()
+void ReadFile()
     {
-        string myString = "The young “doctor” showed his determination early on when he faced a whopping 27 rejections from book publishers for his first children’s book And To Think That I Saw It On Mulberry Street. One day, when he was walking down the street, he literally ran into an old classmate who";
-
-        // divide the string using a ';' as a delimiter
-        // notice that i removed the spaces after the individual words
-        vector<string> splitString = ofSplitString( myString, " ");
-
-        // loop through the results
-        vector<int> counts(100, 0);
-        string current;
-        
-        for(int i=0; i < splitString.size(); i++)
-            {
-                //cout << splitString[i] << endl;
-                current = splitString[i];
-                counts[current.size()] += 1;
-            }
-        
-        for(int i=0; i < counts.size(); i++)
-            {
-                cout << counts[i] << endl;
-            }
-        
+        string astr;
+        ifstream b_file(ofToDataPath("textfile.txt", true));
+        getline ( b_file, astr );
+        cout<<astr;
+        b_file.close();
     }
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -85,9 +69,14 @@ void ofApp::setup()
         ofEnableSmoothing();
         
         //open text file
-        myTextFile.open("textfile.txt",ofFile::WriteOnly);
-        myTextFile << "some text written once using setup.";
-        CountWords();
+        //myTextFile.open("textfile.txt",ofFile::WriteOnly);
+        //myTextFile << "some text written once using setup.";
+        
+        ofFile file;
+        file.open(ofToDataPath("textfile.txt"), ofFile::ReadWrite, false);
+        ofBuffer buff = file.readToBuffer();
+        cout << buff;
+       
         
     }
 
