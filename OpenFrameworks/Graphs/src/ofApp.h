@@ -20,5 +20,10 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+    
+        //my variables
+        ofFile myTextFile;
+        int xmouse = 0;
+        int ymouse = 0;
 		
 };
