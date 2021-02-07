@@ -5,6 +5,7 @@
 //https://www.fluentcpp.com/2017/04/21/how-to-split-a-string-in-c/
 
 #include "ofApp.h"
+#include <algorithm>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -14,70 +15,86 @@ using namespace std;
 
 float counter = 0;
 
-
-
-
-void CountWords()
+void rm_nl(string &s)
     {
-        string myString = "The young “doctor” showed his determination early on when he faced a whopping 27 rejections from book publishers for his first children’s book And To Think That I Saw It On Mulberry Street. One day, when he was walking down the street, he literally ran into an old classmate who";
+        for (int p = s.find("\n"); p != (int) string::npos; p = s.find("\n"))
+        {
+            s.erase(p,1);
+        }
+    }
 
-        // divide the string using a ';' as a delimiter
-        // notice that i removed the spaces after the individual words
+vector<int> CountWords(string myString)
+    {
+        //https://tinyurl.com/3bjkzt45
+        myString.erase(std::remove(myString.begin(), myString.end(), '\n'), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), ','), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), '.'), myString.end());
+        
         vector<string> splitString = ofSplitString( myString, " ");
+        //vector<int> countsVector(100);
+        vector<int> countsVector(1);
+        string currentString;
+        int newSize = 0;
+        for(int i = 0; i < splitString.size(); i++)
+            {
+                currentString = splitString[i];
+                // "a" has lenght of 1 and requires a vector of 2
+                // if lenght( of 1) > size( of 1)
+                if(currentString.length() + 1 > countsVector.size())
+                    {
+                        cout << "Word: " << currentString << " ";
+                        cout << "CurrentString.lenght() :" <<currentString.length() << " ";
+                        cout << "countsVector.size() :" <<currentString.length() << endl;
+                        newSize = currentString.length()+1;
+                        cout << "new size: " << newSize << endl;
+                        //countsVector.resize(newSize, 0);
+                        countsVector.resize(currentString.length()+1, 0);
+                        cout << "Resizing... "<<"countsVector.size() :" << countsVector.size() << endl << endl;
+                        //countsVector.push_back(0);
+                        
+                    }
+                    countsVector.at(currentString.length()) += 1;
+                    //countsVector.at(currentString.length()) += 1;
+                //cout << "Current String Lenght: " << currentString.length() <<endl;
+                //cout << "Current Vector Size: " << countsVector.size() << endl;
+            }
 
-        // loop through the results
-        //vector<int> counts(100, 0);
-        vector<int> counts;
-        string current;
         
-        for(int i=0; i < splitString.size(); i++)
+        for(int i = 0; i < countsVector.size(); i++)
             {
-                //cout << splitString[i] << endl;
-                current = splitString[i];
-                
-                if(current.size() > counts.size() )
-                    {
-                        //int growTimes = current.size() - counts.size();
-                        counts.resize(current.size());
-                        counts[current.size()] += 1;
-                    }
-                else
-                    {
-                        counts[current.size()] += 1;
-                    }
-                
+                cout << "Words of size " << i << ": " << countsVector[i] << endl;
             }
         
-        for(int i=0; i < counts.size(); i++)
-            {
-                cout << counts[i] << endl;
-            }
-        
+        //cout << "Current String: " << currentString << " size: " << currentString.size() << endl;
+        //cout << "Vector Size: " << countsVector.size() << endl;
+        return countsVector;
     }
 
-void ReadFile()
+string ReadFile(string path)
     {
-        string astr;
-        ifstream b_file(ofToDataPath("textfile.txt", true));
-        getline ( b_file, astr );
-        cout<<astr;
-        b_file.close();
+        ofFile file;
+        file.open(ofToDataPath(path), ofFile::ReadWrite, false);
+        ofBuffer buff = file.readToBuffer();
+        return buff.getText();
     }
+
 //--------------------------------------------------------------
 void ofApp::setup()
     {
-        ofEnableSmoothing();
         
-        //open text file
-        //myTextFile.open("textfile.txt",ofFile::WriteOnly);
-        //myTextFile << "some text written once using setup.";
+        //ofEnableSmoothing();
         
-        ofFile file;
-        file.open(ofToDataPath("textfile.txt"), ofFile::ReadWrite, false);
-        ofBuffer buff = file.readToBuffer();
-        cout << buff;
-       
         
+        string filecontents = ReadFile("textfile.txt");
+        
+        vector<int> counts = CountWords(filecontents);
+        
+        /*
+        for(int i=0; i < counts.size(); i++)
+            {
+                cout << "Words of size " << i << ": " << counts[i] << endl;
+            }
+        */
     }
 
 //--------------------------------------------------------------
@@ -89,7 +106,7 @@ void ofApp::update()
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
+    /*
     xmouse = ofGetMouseX();
     ymouse = ofGetMouseY();
     counter = counter + (0.01 * ofGetFrameRate());
@@ -122,7 +139,7 @@ void ofApp::draw(){
       ofVertex(305,200);
       ofVertex(250,25);
     ofEndShape();
-    
+    */
 }
 
 //--------------------------------------------------------------
