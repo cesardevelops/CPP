@@ -33,6 +33,10 @@ vector<int> CountWords(string myString)
         myString.erase(std::remove(myString.begin(), myString.end(), '\n'), myString.end());
         myString.erase(std::remove(myString.begin(), myString.end(), ','), myString.end());
         myString.erase(std::remove(myString.begin(), myString.end(), '.'), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), '?'), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), ':'), myString.end());
+
+
         //Separate the words
         vector<string> splitString = ofSplitString( myString, " ");
         //count the size of the words
@@ -77,7 +81,7 @@ string ReadFile(string path)
 //--------------------------------------------------------------
 void ofApp::setup()
     {
-        filecontents = ReadFile("textfile03.txt");
+        filecontents = ReadFile("textfile05.txt");
         countsVector = CountWords(filecontents);
         biggestCount = GetBiggestInt(countsVector);
     }
