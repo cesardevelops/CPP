@@ -77,20 +77,9 @@ string ReadFile(string path)
 //--------------------------------------------------------------
 void ofApp::setup()
     {
-        //ofEnableSmoothing();
-        
         filecontents = ReadFile("textfile.txt");
-        //vector<int> counts = CountWords(filecontents);
         countsVector = CountWords(filecontents);
         biggestWord = GetBiggestInt(countsVector);
-        //cout << biggestWord << endl;
-        
-        /*
-        for(int i=0; i < counts.size(); i++)
-            {
-                cout << "Words of size " << i << ": " << counts[i] << endl;
-            }
-        */
     }
 
 //--------------------------------------------------------------
@@ -130,13 +119,8 @@ void ofApp::draw()
         xmouse = ofGetMouseX();
         ymouse = ofGetMouseY();
         counter = counter + (0.01 * ofGetFrameRate());
-        string fpsStr = "frame rate: "+ofToString(ofGetFrameRate(), 2);
-        //ofDrawBitmapString(fpsStr, 100,100);
-        //ofDrawBitmapStringHighlight("Everything works!", counter, counter);
-        ofDrawBitmapStringHighlight(to_string(xmouse) +", " + to_string(ymouse), xmouse, ymouse);
-        //ofDrawBitmapStringHighlight("Hello World", xmouse, ymouse);
-        //ofDrawBitmapStringHighlight(to_string(ofGetWindowWidth()), xmouse, ymouse);
-        
+        string fpsStr = "frame rate: " + ofToString(ofGetFrameRate(), 2);
+        //ofDrawBitmapStringHighlight(to_string(xmouse) +", " + to_string(ymouse), xmouse, ymouse);
     }
 
 //--------------------------------------------------------------
