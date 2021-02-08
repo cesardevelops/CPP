@@ -15,9 +15,9 @@
 using namespace std;
 float counter = 0;
 vector<int> countsVector;
-int biggestWord;
+int biggestCount;
 string filecontents;
-
+float yPos=0;
 void rm_nl(string &s)
     {
         for (int p = s.find("\n"); p != (int) string::npos; p = s.find("\n"))
@@ -77,9 +77,9 @@ string ReadFile(string path)
 //--------------------------------------------------------------
 void ofApp::setup()
     {
-        filecontents = ReadFile("textfile.txt");
+        filecontents = ReadFile("textfile03.txt");
         countsVector = CountWords(filecontents);
-        biggestWord = GetBiggestInt(countsVector);
+        biggestCount = GetBiggestInt(countsVector);
     }
 
 //--------------------------------------------------------------
@@ -90,30 +90,54 @@ void ofApp::update()
     }
 
 //--------------------------------------------------------------
-void DrawRectangle(int wordSize, int wordCount, int maxWordSize, int totalColumns)
+void DrawRectangle(int wordSize, int wordCount, int biggestCount, int totalColumns)
     {
-        float redfactor = 255 / maxWordSize;
+        //color calculations
+        float redfactor = 255 / biggestCount;
         float redColor = redfactor * wordCount;
+        //if(redColor > 254){redColor = 255;}
+        
+        //size calculations
         float offsetForColumns = 20;
-        //Rectangle
+        float sizefactor = 400/biggestCount;
+        float columnSize = sizefactor * wordCount;
+        
+        
         ofRectangle rect;
         rect.x = 15 * wordSize;
-        rect.y = ofGetWindowHeight() - (10 * wordCount) - offsetForColumns;
+        rect.y = ofGetWindowHeight() - (columnSize) - offsetForColumns;
         rect.width = 15;
-        rect.height = 10 * wordCount;
+        rect.height = columnSize;
         ofSetColor(redColor, 0, 0);
         ofDrawRectangle(rect);
         //Text
         ofSetColor(255, 255, 255);
         ofDrawBitmapString(to_string(wordCount), rect.x, rect.y);
+        
+        /*
+        //Rectangle
+        ofRectangle rect;
+        rect.x = 15 * wordSize;
+        rect.y = ofGetWindowHeight() - (2 * wordCount) - offsetForColumns;
+        rect.width = 15;
+        rect.height = 2 * wordCount;
+        ofSetColor(redColor, 0, 0);
+        ofDrawRectangle(rect);
+        //Text
+        ofSetColor(255, 255, 255);
+        ofDrawBitmapString(to_string(wordCount), rect.x, rect.y);
+         */
     }
 
 void ofApp::draw()
     {
-        ofDrawBitmapString(filecontents, 0, 0);
+        yPos += ofGetLastFrameTime() * 5;
+        
+        ofSetColor(200, 200, 200);
+        ofDrawBitmapString(filecontents, 250, yPos);
         for(int i = 1; i < countsVector.size(); i++)
             {
-                DrawRectangle(i, countsVector[i], biggestWord, countsVector.size());
+                DrawRectangle(i, countsVector[i], biggestCount, countsVector.size());
             }
         
         xmouse = ofGetMouseX();
