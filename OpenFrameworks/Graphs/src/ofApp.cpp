@@ -81,7 +81,7 @@ string ReadFile(string path)
 //--------------------------------------------------------------
 void ofApp::setup()
     {
-        filecontents = ReadFile("textfile05.txt");
+        filecontents = ReadFile("textfile06.txt");
         countsVector = CountWords(filecontents);
         biggestCount = GetBiggestInt(countsVector);
     }
@@ -96,16 +96,13 @@ void ofApp::update()
 //--------------------------------------------------------------
 void DrawRectangle(int wordSize, int wordCount, int biggestCount, int totalColumns)
     {
-        //color calculations
-        float redfactor = 255 / biggestCount;
-        float redColor = redfactor * wordCount;
-        //if(redColor > 254){redColor = 255;}
+        //color calculation
+        float redColor = (255 * wordCount) / biggestCount;
         
         //size calculations
         float offsetForColumns = 20;
         float sizefactor = 400/biggestCount;
-        float columnSize = sizefactor * wordCount;
-        
+        float columnSize = (400 * wordCount) / biggestCount;
         
         ofRectangle rect;
         rect.x = 15 * wordSize;
@@ -117,20 +114,7 @@ void DrawRectangle(int wordSize, int wordCount, int biggestCount, int totalColum
         //Text
         ofSetColor(255, 255, 255);
         ofDrawBitmapString(to_string(wordCount), rect.x, rect.y);
-        
-        /*
-        //Rectangle
-        ofRectangle rect;
-        rect.x = 15 * wordSize;
-        rect.y = ofGetWindowHeight() - (2 * wordCount) - offsetForColumns;
-        rect.width = 15;
-        rect.height = 2 * wordCount;
-        ofSetColor(redColor, 0, 0);
-        ofDrawRectangle(rect);
-        //Text
-        ofSetColor(255, 255, 255);
-        ofDrawBitmapString(to_string(wordCount), rect.x, rect.y);
-         */
+    
     }
 
 void ofApp::draw()
@@ -138,16 +122,16 @@ void ofApp::draw()
         yPos += ofGetLastFrameTime() * 5;
         
         ofSetColor(200, 200, 200);
-        ofDrawBitmapString(filecontents, 250, yPos);
+        ofDrawBitmapString(filecontents, 350, yPos);
         for(int i = 1; i < countsVector.size(); i++)
             {
                 DrawRectangle(i, countsVector[i], biggestCount, countsVector.size());
             }
         
-        xmouse = ofGetMouseX();
-        ymouse = ofGetMouseY();
-        counter = counter + (0.01 * ofGetFrameRate());
-        string fpsStr = "frame rate: " + ofToString(ofGetFrameRate(), 2);
+        //xmouse = ofGetMouseX();
+        //ymouse = ofGetMouseY();
+        //counter = counter + (0.01 * ofGetFrameRate());
+        //string fpsStr = "frame rate: " + ofToString(ofGetFrameRate(), 2);
         //ofDrawBitmapStringHighlight(to_string(xmouse) +", " + to_string(ymouse), xmouse, ymouse);
     }
 
