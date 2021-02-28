@@ -488,7 +488,7 @@
 				E42962B82163EDD300A6A9E2 /* video */,
 			);
 			name = openFrameworks;
-			path = ../../../../Downloads/of_v0.11.0_osx_release/libs/openFrameworks;
+			path = ../of_v0.11.0_osx_release/libs/openFrameworks;
 			sourceTree = "<group>";
 		};
 		E42962AB2163EDD300A6A9E2 /* 3d */ = {
