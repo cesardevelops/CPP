@@ -13,12 +13,16 @@
 #include <fstream>
 
 using namespace std;
+
+//Variables used both on update() and draw()
+string filepath = "textfile06.txt";
 float counter = 0;
 vector<int> countsVector;
 int biggestCount;
 string filecontents;
-float yPos=0;
-vector<string> remove_list = {"\n", ",", ".","?",":",">","<","?","!"};
+float textypos=0;
+//-------------------------------------------
+
 void rm_nl(string &s)
     {
         for (int p = s.find("\n"); p != (int) string::npos; p = s.find("\n"))
@@ -27,28 +31,29 @@ void rm_nl(string &s)
             }
     }
 
-void RemoveCharacters(string &myString)
+//removes a single character fro a string
+void RemoveChar(string &myString, char &char_to_remove)
     {
-        
-        myString.erase(std::remove(myString.begin(), myString.end(), '\n'), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), ','), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), '.'), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), '?'), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), ':'), myString.end());
+        //Explanation of this line of code can be found here: https://tinyurl.com/3bjkzt45
+        myString.erase(std::remove(myString.begin(), myString.end(), char_to_remove), myString.end());
     }
 
+//removes characters from a string
+void RemoveCharacters(string &myString, vector<char> &list)
+    {
+        for(int i = 0; i < list.size(); i++)
+            {
+                RemoveChar(myString, list.at(i));
+            }
+    }
+
+
+//counts how many words of size X exist in a string.
 vector<int> CountWords(string myString)
     {
-        //https://tinyurl.com/3bjkzt45
-        //Remove unnecessary elements
-        RemoveCharacters(myString);
-        /*
-        myString.erase(std::remove(myString.begin(), myString.end(), '\n'), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), ','), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), '.'), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), '?'), myString.end());
-        myString.erase(std::remove(myString.begin(), myString.end(), ':'), myString.end());
-         */
+        //Remove unnecessary characters
+        vector<char> remove_list = {'!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '\n', '{', '}', ':', '"', ',', '?', '.', '<', '>', '^'};
+        RemoveCharacters(myString, remove_list);
 
         //Separate the words
         vector<string> splitString = ofSplitString( myString, " ");
@@ -70,7 +75,8 @@ vector<int> CountWords(string myString)
         return countsVector;
     }
 
-int GetBiggestInt(vector<int> counts)
+// returns the biggest in from a vector
+int GetBiggestInt(vector<int> &counts)
     {
         int max = 0;
         for(int i = 0; i < counts.size(); i++)
@@ -83,7 +89,8 @@ int GetBiggestInt(vector<int> counts)
         return max;
     }
 
-string ReadFile(string path)
+//reads a file by passing it it the path to it.
+string ReadFile(string &path)
     {
         ofFile file;
         file.open(ofToDataPath(path), ofFile::ReadWrite, false);
@@ -91,22 +98,7 @@ string ReadFile(string path)
         return buff.getText();
     }
 
-//--------------------------------------------------------------
-void ofApp::setup()
-    {
-        filecontents = ReadFile("textfile06.txt");
-        countsVector = CountWords(filecontents);
-        biggestCount = GetBiggestInt(countsVector);
-    }
-
-//--------------------------------------------------------------
-void ofApp::update()
-    {
-        
-
-    }
-
-//--------------------------------------------------------------
+//This draws a rectangle
 void DrawRectangle(int wordSize, int wordCount, int biggestCount, int totalColumns)
     {
         //color calculation
@@ -130,22 +122,36 @@ void DrawRectangle(int wordSize, int wordCount, int biggestCount, int totalColum
     
     }
 
+//---------------------------------------------OPEN FRAMEWORKS GRAPHIC SETUP--------------------------------->
+
+
+
+
+//OpenFrameworks function. It runs once, great for getting values ready prior to drawing
+void ofApp::setup()
+    {
+        filecontents = ReadFile(filepath);
+        countsVector = CountWords(filecontents);
+        biggestCount = GetBiggestInt(countsVector);
+    }
+
+
+void ofApp::update()
+    {
+        
+
+    }
+
+//OpenFrameworks function. It runs each frame.
 void ofApp::draw()
     {
-        yPos += ofGetLastFrameTime() * 5;
-        
+        textypos += ofGetLastFrameTime() * 5;
         ofSetColor(200, 200, 200);
-        ofDrawBitmapString(filecontents, 350, yPos);
+        ofDrawBitmapString(filecontents, 350, textypos);
         for(int i = 1; i < countsVector.size(); i++)
             {
                 DrawRectangle(i, countsVector[i], biggestCount, countsVector.size());
             }
-        
-        //xmouse = ofGetMouseX();
-        //ymouse = ofGetMouseY();
-        //counter = counter + (0.01 * ofGetFrameRate());
-        //string fpsStr = "frame rate: " + ofToString(ofGetFrameRate(), 2);
-        //ofDrawBitmapStringHighlight(to_string(xmouse) +", " + to_string(ymouse), xmouse, ymouse);
     }
 
 //--------------------------------------------------------------
