@@ -23,13 +23,15 @@ string filepath = "textfile06.txt";
 string filecontents;
 vector<int> countsVector;
 
-//Removes a new line in a string. Function not in used, copied from internet.
-//I left it here hecause I want ot learn how this works later.
+
+/*
+//Removes a new line in a string. Not used
 void rm_nl(string &s){
     for (int p = s.find("\n"); p != (int) string::npos; p = s.find("\n")){
         s.erase(p, 1);
     }
 }
+*/
 
 //removes a single character fro a string
 void RemoveChar(string &myString, char &char_to_remove){
