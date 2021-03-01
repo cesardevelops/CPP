@@ -18,6 +18,7 @@ vector<int> countsVector;
 int biggestCount;
 string filecontents;
 float yPos=0;
+vector<string> remove_list = {"\n", ",", ".","?",":",">","<","?","!"};
 void rm_nl(string &s)
     {
         for (int p = s.find("\n"); p != (int) string::npos; p = s.find("\n"))
@@ -26,16 +27,28 @@ void rm_nl(string &s)
             }
     }
 
-vector<int> CountWords(string myString)
+void RemoveCharacters(string &myString)
     {
-        //https://tinyurl.com/3bjkzt45
-        //Remove unnecessary elements
+        
         myString.erase(std::remove(myString.begin(), myString.end(), '\n'), myString.end());
         myString.erase(std::remove(myString.begin(), myString.end(), ','), myString.end());
         myString.erase(std::remove(myString.begin(), myString.end(), '.'), myString.end());
         myString.erase(std::remove(myString.begin(), myString.end(), '?'), myString.end());
         myString.erase(std::remove(myString.begin(), myString.end(), ':'), myString.end());
+    }
 
+vector<int> CountWords(string myString)
+    {
+        //https://tinyurl.com/3bjkzt45
+        //Remove unnecessary elements
+        RemoveCharacters(myString);
+        /*
+        myString.erase(std::remove(myString.begin(), myString.end(), '\n'), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), ','), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), '.'), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), '?'), myString.end());
+        myString.erase(std::remove(myString.begin(), myString.end(), ':'), myString.end());
+         */
 
         //Separate the words
         vector<string> splitString = ofSplitString( myString, " ");
