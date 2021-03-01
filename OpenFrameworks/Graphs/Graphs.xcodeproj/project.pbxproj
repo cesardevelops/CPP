@@ -23,6 +23,7 @@
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
 		F2ED8F0A0216E26FD84D0D06 /* ofxAssimpTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3923487794E4EB46AD92C97C /* ofxAssimpTexture.cpp */; };
+		F881A62625ECC8F600BC92CC /* textParsing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F881A62425ECC8F600BC92CC /* textParsing.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -291,6 +292,8 @@
 		ECC821D39E5D84824E1355E5 /* ofxAssimpAnimation.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxAssimpAnimation.h; path = ../../../../Downloads/of_v0.11.0_osx_release/addons/ofxAssimpModelLoader/src/ofxAssimpAnimation.h; sourceTree = SOURCE_ROOT; };
 		EDFE889B79BB99D536443DC6 /* postprocess.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = postprocess.h; path = ../../../../Downloads/of_v0.11.0_osx_release/addons/ofxAssimpModelLoader/libs/assimp/include/assimp/postprocess.h; sourceTree = SOURCE_ROOT; };
 		EEDBCCBE44DCDDF82E08054A /* anim.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = anim.h; path = ../../../../Downloads/of_v0.11.0_osx_release/addons/ofxAssimpModelLoader/libs/assimp/include/assimp/anim.h; sourceTree = SOURCE_ROOT; };
+		F881A62425ECC8F600BC92CC /* textParsing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = textParsing.cpp; sourceTree = "<group>"; };
+		F881A62525ECC8F600BC92CC /* textParsing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = textParsing.hpp; sourceTree = "<group>"; };
 		F8DBE90825CF52A200455659 /* bin */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bin; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -772,6 +775,8 @@
 			children = (
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				F881A62425ECC8F600BC92CC /* textParsing.cpp */,
+				F881A62525ECC8F600BC92CC /* textParsing.hpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 			);
 			path = src;
@@ -898,6 +903,7 @@
 				502B215771BBEA9D64C8F1CA /* ofxPanel.cpp in Sources */,
 				48A5669D29795DFEDBA6D92B /* ofxSlider.cpp in Sources */,
 				88CF9D9E01F6E17D5EF4EB4B /* ofxSliderGroup.cpp in Sources */,
+				F881A62625ECC8F600BC92CC /* textParsing.cpp in Sources */,
 				D66713DE5ADF241F10F476BA /* ofxToggle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

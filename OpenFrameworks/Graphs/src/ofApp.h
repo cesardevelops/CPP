@@ -25,5 +25,13 @@ class ofApp : public ofBaseApp{
         ofFile myTextFile;
         int xmouse = 0;
         int ymouse = 0;
+    
+        //Variables used both on update() and draw()
+        int biggestCount;
+        float textypos = 0;
+        float counter = 0;
+        string filepath = "textfile06.txt";
+        string filecontents;
+        vector<int> countsVector;
 		
 };
