@@ -30,7 +30,7 @@ class ofApp : public ofBaseApp{
         int biggestCount;
         float textypos = 0;
         float counter = 0;
-        string filepath = "textfile06.txt";
+        string filepath = "textfile03.txt";
         string filecontents;
         vector<int> countsVector;
 		
