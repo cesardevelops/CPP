@@ -31,7 +31,7 @@ class Foo
             }
         //PROBLEM: This method needs to be virtual so that the subclass method can be called
         //PROBLEM: Could use reference instead of copying string
-        virtual void print(std::string &message)
+        virtual void print(std::string message)
             {
                 std::cout << "Foo:print() " << message << std::endl;
             }
@@ -57,7 +57,7 @@ class Bar : public Foo
                 std::cout << "~Bar()" << std::endl;
             }
         //PROBLEM: Could use reference instead of copying string
-        void print(std::string& message)
+        void print(std::string message)
             {
                 //PROBLEM: since it is unsigned, it can jump to max of unsigned once it goes negative
                 for(int i = m_value; i >= 0; --i)
@@ -72,7 +72,8 @@ int main(int argc, const char * argv[])
         
         Foo* myBar = new Bar(2);
         //std::string ;
-        myBar->print(std::string("Hello"));
+        //myBar->print(std::string("Hello from main"));
+        myBar->print("Hello from main");
         delete myBar;
         
         
