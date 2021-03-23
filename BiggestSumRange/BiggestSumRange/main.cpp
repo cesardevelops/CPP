@@ -30,6 +30,8 @@ EDGE CASES
 if first number is 0, then return the right side of the range.
 Range with highest sum: {0,3}
 
+REFERENCES:
+ https://www.geeksforgeeks.org/range-sum-queries-without-updates/
  */
 
 #include <iostream>
