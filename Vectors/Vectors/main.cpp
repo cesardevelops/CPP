@@ -53,8 +53,10 @@ vector<int> GetUnitVector(vector<int> A)
 int main(int argc, const char * argv[])
     {
         float RadtoDeg = 57.295779513;
-        vector<int> pointA{1,-1,1};
-        vector<int> pointB{1,1,-1};
+        //vector<int> pointA{1,0,0};
+        //vector<int> pointB{-1,0,0};
+        vector<int> pointA{2, 3, 0};
+        vector<int> pointB{-3, 2, 0};
         vector<int> ABVector = GetVector(pointA, pointB);
         float RadiansResult = GetAngleRadians(pointA, pointB);
         cout << "Vector: " << ABVector.at(0) << ", "<< ABVector.at(1) << ", " << ABVector.at(2) << endl;
