@@ -1,8 +1,6 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
-
 int myatoi(std::string &str){
     //check if the string is empty
     if(str == ""){
@@ -26,13 +24,11 @@ int myatoi(std::string &str){
         //If it is a number
         else{
             //check for overflow
-            if(result >= INT_MAX/10){
+            if(result >= INT_MAX / 10){
                 return 0;
             }
             result = (result * 10) + (str[i] - '0');
         }
-        //valid
-       
     }
     
     return result * sign;
