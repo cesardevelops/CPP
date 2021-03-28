@@ -92,7 +92,7 @@ bool isOnTile(vec2 P, const vector<vec2>& tile)
 
 int main(int argc, const char * argv[])
     {
-        vec2 mouse = {0.0f, -1.0f};
+        vec2 mouse = {0.0f, 4.0f};
         vec2 A = {0.0f, 1.0f};
         vec2 B = {1.0f, 0.5f};
         vec2 C = {1.0f, -0.5f};
