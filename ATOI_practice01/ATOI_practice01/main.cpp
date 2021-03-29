@@ -14,7 +14,7 @@
 #include <string>
 using namespace std;
 
-int myatoi(string &str){
+int myatoi(const char* str){
     
     //variable definition
     int result = 0;
@@ -22,7 +22,7 @@ int myatoi(string &str){
     int counter = 0;
     
     //check if string is empty
-    if(str.length() == 0){
+    if(strlen(str) == 0){
         return 0;
     }
     
@@ -33,7 +33,7 @@ int myatoi(string &str){
     }
     
     //iterate through each character
-    for(;counter !=str.length(); counter++){
+    for(;counter != strlen(str); counter++){
         
         //Check if the characer is outside the range 0-9
         if(str[counter] < '0' || str[counter] > '9'){
@@ -53,7 +53,7 @@ int myatoi(string &str){
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    string myString = "-1234";
-    cout << myatoi(myString) << endl;
+    const char* str = "-123";
+    cout << myatoi(str) << endl;
     return 0;
 }
