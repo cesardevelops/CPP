@@ -1,56 +1,77 @@
-//
-//  main.cpp
-//  CD
-//
-//  Created by Cesar Montero on 3/25/21.
-//
+/*
+cwd, args -> dest
 
-#include <iostream>
-using namespace std;
+cd("/a/b", "c/../d") -> "/a/b/d"
+cd("/a/b", "c/d")    -> "/a/b/c/d"
+cd("/a/b", "/c/d")   -> "/c/d"
+cd("/a/b", "../../../../../") -> "/"
 
-//cwd = current working directory
-//arg = argument
 
-bool isLetter(char &str){
-    //lower cap letters
-    if((str >= 'a') && (str <= 'z')){return true;}
-    else if((str >= 'A') && (str <= 'Z')){return true;}
-    else{return false;}
-}
+cwd:  /a/b
+args:   c/../d
+1: c -> /a/b/c
+2: .. -> /a/b
+3: d  -> /a/b/d
 
-bool isDash(char &str){
-    if(str == '/'){return true;}
-       else{return false;}
-}
+cwd:   /a/b
+args:  /c/d
+1: /  -> /
+2: c  -> /c
+3: d  -> /c/d
 
-bool isDot(char &str){
-    if(str == '.'){return true;}
-       else{return false;}
-}
-       
-std::string cd(std::string &cwd, std::string &arg){
+*/
 
-    string finalpath = "";
-    
-    //cd("/", "a/b") -> "/a/b"
-    //If we get a "/" as current path, and "a/b" as argument, then log into the folder
-    //The argument contains = folder/folder
-    
-    string pattern = "";
-    string str = "randomFolder/stuff";
-    
-    //c
-    for(int i = 0; i < str.size(); i++){
-        cout << isLetter(str.at(i)) << endl;
+// split("1/2/3", '/')  -> ["1", "2", "3"]
+// "1,2,3,4,5" -> split("1,2,3,4,5", ',') -> ["1", "2", "3", "4", "5"]
+std::vector<std::string> split(std::string &input, std::string &separator);
+
+// join(["1", "2"], "/") -> "1/2"
+std::string join(std::vector<std::string> &input, std::string &separator);
+
+
+// Complexity:
+// time: O(N + M)
+// space: O(~ N + M)
+
+std::string cd_command(std::string &cwd, std::string &args)
+{
+    // No arguments, nothing happens, we stay where we are.
+    if (args.size() == 0) {
+        return cwd;
     }
     
-    return "nothing";
-}
-
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    string cwd = "/";
-    string arg = "nameA/nameB";
-    cout << cd(cwd, arg);
-    return 0;
+    std::vector<std::string> current_path = {};
+    if (args[0] == '/') {
+        current_path = {};
+    }
+    else {
+        // O(cwd)
+        current_path = split(cwd, '/');
+    }
+    
+    // O(args)
+    std::vector<std::string> args_tokens = split(args, '/');
+    
+    // < O(args)
+    for (std::string &token : args_tokens) {
+        // Empty string or '.' means do nothing
+        if (token == '' || token == '.') {
+            continue;
+        }
+        // .. means go up.
+        else if (token == '..' && current_path.size() != 0) {
+            current_path.pop_back();
+        }
+        // valid directory!
+        else {
+            current_path.push_back(token);
+        }
+    }
+    
+    // At this point, we resolved the arguments onto the current path
+    // and we need to convert the vector back to a single string (destination)
+    std::string final_path = join(current_path, "/");
+    final_path = "/" + final_path;
+    
+    return final_path;
 }

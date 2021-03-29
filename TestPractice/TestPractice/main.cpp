@@ -28,7 +28,8 @@ float crossProduct2D(vec2 A, vec2 B){
 
 
 bool isOnTile(vec2 pos, const vector<vec2>& tile){
-    
+    //
+    vector<int> results;
     // vector of: mouse to point in hexagon
     vec2 PA = make2DVector(pos, tile.at(0));
     vec2 PB = make2DVector(pos, tile.at(1));
@@ -46,13 +47,25 @@ bool isOnTile(vec2 pos, const vector<vec2>& tile){
     vec2 FA = make2DVector(tile.at(5), tile.at(0));
     
     float PAxAB = crossProduct2D(PA, AB);
+    if(PAxAB != 0){results.push_back(PAxAB);}
+    
     float PBxBC = crossProduct2D(PB, BC);
+    if(PBxBC != 0){results.push_back(PBxBC);}
+    
     float PCxCD = crossProduct2D(PC, CD);
+    if(PCxCD != 0){results.push_back(PCxCD);}
+    
     float PDxDE = crossProduct2D(PD, DE);
+    if(PDxDE != 0){results.push_back(PDxDE);}
+    
     float PExEF = crossProduct2D(PE, EF);
+    if(PExEF != 0){results.push_back(PExEF);}
+    
     float PFxFA = crossProduct2D(PF, FA);
+    if(PFxFA != 0){results.push_back(PFxFA);}
     
     //Print Cross Products
+    /*
     cout << PAxAB << endl;
     cout << PBxBC << endl;
     cout << PCxCD << endl;
@@ -60,13 +73,18 @@ bool isOnTile(vec2 pos, const vector<vec2>& tile){
     cout << PExEF << endl;
     cout << PFxFA << endl;
     cout << endl;
+     */
     //Check signs
-    vector<float> results {PAxAB,PBxBC,PCxCD,PDxDE,PExEF,PFxFA};
-    for(int i = 0; i < results.size() -1; i++){
-        if(results.at(i) != 0){
-            if(results.at(i) * results.at(i+1) < 0){return false;}
+    //vector<float> results {PAxAB,PBxBC,PCxCD,PDxDE,PExEF,PFxFA};
+
+    for(int i = 0; i < results.size(); i++){
+        if(results.at(0) != results.at(i)){
+            return false;
         }
     }
+    //cout << "size" << results.size() - 1;
+
+     
     return true;
 }
 
