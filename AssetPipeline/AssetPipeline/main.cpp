@@ -62,16 +62,15 @@ public:
     virtual ~Importer(){};
 
     //Each sub-asset type of asset would have its own type of importing
-    virtual void makeOrionAsset(){}// Perhaps an interface?
-    virtual void readFile(){}
+    virtual void ReadFile(){}
+    virtual void GetFileSize(){}
+    virtual void Import(){}
     
-    
-    //All files imported have a path and size
-    void SetFilePath(string &&s){filePath = s;}//I want to return int if successful
-    string GetFileSize(){return filePath;}
-    void setImportStatus(){}//if something fails? We need to alert
-    int getImportStatus(){ return 0;}//Maybe we need to display the status of the import, progression
-    //maybe we want to make a format specific asset upon importing?
+    //All files imported have some shared methods?
+    void SetFilePath(string &&s){filePath = s;}
+    string GetFilePath(){ return filePath;};
+    void setImportStatus(){}
+    int getImportStatus(){ return 0;}
     
 protected:
     int importStatus = 0;
@@ -86,10 +85,17 @@ class FBXImporter: public Importer{
 public:
     FBXImporter(): Importer(){}
     ~FBXImporter(){}
-    void readFile(){}
-    void parseFBX(){}
-    void storeLocal(){} //
-    void cleanFBX(){} //sometimes are quite dirty
+    
+    //exist on parent, but defined only on subclass
+    void ReadFile(){
+        ParseFBX();
+    }
+    
+    //some methods particular to the subclass and no other type of asset
+private:
+    void ParseFBX(){}
+    void StoreLocal(){} //
+    void CleanFBX(){} //sometimes are quite dirty
     
 protected:
     vector<Asset> FBXAssets = {};
@@ -99,13 +105,6 @@ protected:
 
 //Importer for PNG...and so on for the rest of the items.
 //...A subclass for each importer/exporter to make it more modular
-class PNGImporter: public Importer{
-public:
-    PNGImporter(): Importer(){}
-    ~PNGImporter(){}
-protected:
-    vector<Asset> PNGAssets = {};
-};
 
 
 //...A subclass for each importer/exporter to make it more modular
@@ -120,7 +119,7 @@ int main(int argc, const char * argv[]) {
     //Make an Importer
     Importer* myImporter= new FBXImporter();
     myImporter->SetFilePath("/Documents/Cesar");
-    cout << myImporter->GetFileSize() << endl;
+    cout << myImporter->GetFilePath() << endl;
     
     //std::cout << "Hello, World!\n";
     return 0;
